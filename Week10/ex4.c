@@ -1,26 +1,59 @@
+#include <errno.h>
 #include <stdio.h>
-#include <sys/types.h>
-#include <stdlib.h>
-#include <string.h>
-#include <unistd.h>
 #include <dirent.h>
+#include <sys/stat.h>
+#include <string.h>
+#include <stdbool.h>
 
-int main(void){	
-	char *dirname = "./tmp";
-	DIR *dir = opendir(dirname);
+typedef struct{
+    ino_t inode;
+    char name[128];
+    nlink_t links;
+}file;
 
-	if (dir == NULL){
-		printf("Error opening dir\n");
-		return 1;
-	}
 
-    struct dirent *currentFile;
-    while ((currentFile = readdir(dir)) != NULL){
-        if(!strcmp(currentFile->d_name, ".." ) || !strcmp(currentFile->d_name, "."))
+bool found = 0;
+file files[128];
+unsigned int counter = 0;
+struct stat a;
+struct dirent *currentFile;
+
+int main(){
+    DIR *dir=opendir("tmp");
+
+    while((currentFile=readdir(dir))!=0){
+        if (!strcmp(currentFile->d_name, ".") || !strcmp(currentFile->d_name, ".."))
+			continue;
+
+        char fileName[32];
+        strcpy(fileName, "tmp/");
+        strcat(fileName, currentFile->d_name);
+
+        if(stat(fileName, &a)!=0)
+            return ENOENT;
+        found=0;
+
+        for(int i=0;i<counter;i++){
+            if(files[i].inode==a.st_ino){
+                found=1;
+                strcat(strcat(files[i].name, ", "), currentFile->d_name);
+                files[i].links++;
+                break;
+            }
+        }
+
+        if(found)
             continue;
-		printf("%s - %ld\n", currentFile->d_name, currentFile->d_ino);
-	};
+        
+        File new;
+        new.links=1;
+        new.inode=a.st_ino;
+        strcpy(new.name, currentFile->d_name);
+        files[counter++]=x;
+    }
 
     closedir(dir);
-	return 0;
+    for(int j=0;j<counter;j++) if(files[j].links>1) 
+        printf("%s - %llu\n", files[j].names, files[j].inode);
+    return 0;
 }
