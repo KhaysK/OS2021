@@ -45,15 +45,15 @@ int main(){
         if(found)
             continue;
         
-        File new;
+        file new;
         new.links=1;
         new.inode=a.st_ino;
         strcpy(new.name, currentFile->d_name);
-        files[counter++]=x;
+        files[counter++]=new;
     }
 
     closedir(dir);
     for(int j=0;j<counter;j++) if(files[j].links>1) 
-        printf("%s - %llu\n", files[j].names, files[j].inode);
+        printf("%s - %lu\n", files[j].name, files[j].inode);
     return 0;
 }
