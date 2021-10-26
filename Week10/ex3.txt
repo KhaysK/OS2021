@@ -1,0 +1,3 @@
+What does 660 mean for ex3.txt? - u=rw- g=rw- o=---
+What does 775 mean for ex3.txt? - u=rwx g=rwx o=r-x
+What does 777 mean for ex3.txt? - u=rwx g=rwx o=rwx

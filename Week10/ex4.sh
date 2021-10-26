@@ -1,3 +1,6 @@
+rm tmp/link1
+rm ex4.txt
+
 mkdir -p tmp
 touch tmp/{file1,file2}
 ln tmp/file1 tmp/link1

@@ -14,13 +14,13 @@ int main(void){
 		return 1;
 	}
 
-    struct dirent currentFile;
-    while ((currentFile = readdir(dirp)) != NULL){
-        if(currentFile->d_name == ".." || currentFile->d_name == ".")
-            continue
-		printf("%s - %d\n", currentFile->d_name, currentFile->d_ino);
+    struct dirent *currentFile;
+    while ((currentFile = readdir(dir)) != NULL){
+        if(!strcmp(currentFile->d_name, ".." ) || !strcmp(currentFile->d_name, "."))
+            continue;
+		printf("%s - %ld\n", currentFile->d_name, currentFile->d_ino);
 	};
 
-    closedir(dirp);
+    closedir(dir);
 	return 0;
 }
