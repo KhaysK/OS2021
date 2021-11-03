@@ -1,4 +1,11 @@
 OUTPUT FROM lofsdisk:
+Files:
+bin
+..
+lost+found
+ex2.out
+file1
+file2
 USUAL OUTPUT:
 Files: 
  
