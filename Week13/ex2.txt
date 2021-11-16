@@ -1,0 +1,14 @@
+Prevention
+When a stalemate develops, the operating system should terminate certain processes in order to resume normal operation.
+When the system should not halt by any means and resuming the process is not a huge concern, deadlock prevention is beneficial. 
+
+Recovery
+The recovery method provides many options for dealing with the already-occurring impasse.
+In terms of cruelty, the methods differ.
+This technique is the simplest to execute (no additional effort is necessary to terminate one process), 
+but it is also the most risky and unstable. 
+
+Avoidence
+Avoidance is the better option. It is easier to implement than preventive, but it is slower in terms of performance.
+The strategy's central premise is to foresee deadlocks and control resources to avoid them.
+Because this forecast consumes computer resources, this technique is slower. 
